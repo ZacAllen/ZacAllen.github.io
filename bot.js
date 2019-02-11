@@ -3,6 +3,7 @@
 const Discord = require('discord.js');
 const syllable = require('syllable');
 const getRhymes = require('get-rhymes');
+const fs = require('fs');
 
 var auth = require('./auth.json');
 // initialize the bot
@@ -46,7 +47,7 @@ bot.on('message', message => {
 
         for (var i = 0; i < messageArray.length; i++) {
             if (syllable(messageArray[i]) == first && selected == false) {
-                stanzaOne = messageArray[i];
+                stanzaOne = messageArray[i] + "\r\n";
                 selected = true;
             } else if (syllable(messageArray[i]) == second) {
                 stanzaTwo = messageArray[i];
@@ -56,11 +57,12 @@ bot.on('message', message => {
         }
 
         //compile haiku
-        haiku += stanzaOne + "\n" + stanzaTwo + "\n" + stanzaThree;
+        haiku += stanzaOne + "\r\n" + stanzaTwo + "\r\n\n" + stanzaThree;
 
         console.log(haiku);
         //send message
         message.channel.send(haiku);
+        writeToFile('Haikus.txt', haiku);
 
     });
 
@@ -89,7 +91,7 @@ bot.on('message', message => {
         //scrable array so selected message is potentially different each time
         messageArray = shuffleArray(messageArray);
         //start poem off with first stanza
-        var poem = messageArray[0];
+        var poem = messageArray[0] + "\r\n";
 
         //identify last word of stanza
         var lastword = messageArray[0].substring(messageArray[0].lastIndexOf(" ") + 1);
@@ -107,7 +109,7 @@ bot.on('message', message => {
                 for (var j = 0; j < rhymeArray.length; j++) {
                     //check if last word is contained within the ending of this index of the rhyme array.
                     if (rhymeArray[j].substring((rhymeArray[j].length - 1) - lastword2.length -1).includes(lastword2)) {
-                        poem += "\n" + messageArray[i];
+                        poem += "\r\n" + messageArray[i] + "\r\n";
                         //break out of the loop to prevent repeat stanzas
                         j += rhymeArray.length + 1;
                     }
@@ -116,6 +118,7 @@ bot.on('message', message => {
             console.log(poem);
             //send message
             message.channel.send(poem);
+            writeToFile('Poems.txt', poem);
         });
         
 
@@ -123,6 +126,17 @@ bot.on('message', message => {
 
   }
 });
+
+
+function writeToFile(file, text) {
+    fs.writeFileSync(file, text, function(error) {
+                if (error) {
+                    throw error;
+                }
+                console.log('File saved!');
+            });
+}
+
 
 function shuffleArray(array) {
     var i, j, k
