@@ -1,0 +1,14 @@
+{
+	"name": "PoemMakerBot",
+	"version": "1.0.0",
+	"description": "Makes poems from discord messages",
+	"main": "bot.js",
+	"author": "Zach Allen & Sarah Tsai",
+	"dependencies": {
+		"discord.io": "https://github.com/woor/discord.io/tarball/gateway_v6",
+		"discord.js": "^11.4.2",
+		"get-rhymes": "^2.0.0",
+		"syllable": "^3.4.0",
+		"winston": "^3.2.1"
+	}
+}
