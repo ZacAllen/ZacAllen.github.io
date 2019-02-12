@@ -9,7 +9,7 @@ var auth = require('./auth.json');
 // initialize the bot
 const bot = new Discord.Client();
 //login token
-bot.login('NTQyMTExNzIxNTQwODEyODEx.DzzJdg.PUX-CTEjU_QjWmz3Khq5xAU_OpE');
+bot.login('NTQyMTExNzIxNTQwODEyODEx.D0OjHw.kg9JiKMWZFGW4Zk8FkSrr0kQUWs');
 
 bot.on('ready', () => {
     console.log("I'm ready!");
@@ -47,7 +47,7 @@ bot.on('message', message => {
 
         for (var i = 0; i < messageArray.length; i++) {
             if (syllable(messageArray[i]) == first && selected == false) {
-                stanzaOne = messageArray[i] + "\r\n";
+                stanzaOne = messageArray[i];
                 selected = true;
             } else if (syllable(messageArray[i]) == second) {
                 stanzaTwo = messageArray[i];
@@ -57,12 +57,12 @@ bot.on('message', message => {
         }
 
         //compile haiku
-        haiku += stanzaOne + "\r\n" + stanzaTwo + "\r\n\n" + stanzaThree;
+        haiku += stanzaOne + "\r\n" + stanzaTwo + "\r\n" + stanzaThree;
 
         console.log(haiku);
         //send message
         message.channel.send(haiku);
-        writeToFile('Haikus.txt', haiku);
+        writeToFile('Poem1.txt', haiku);
 
     });
 
@@ -109,7 +109,7 @@ bot.on('message', message => {
                 for (var j = 0; j < rhymeArray.length; j++) {
                     //check if last word is contained within the ending of this index of the rhyme array.
                     if (rhymeArray[j].substring((rhymeArray[j].length - 1) - lastword2.length -1).includes(lastword2)) {
-                        poem += "\r\n" + messageArray[i] + "\r\n";
+                        poem += "\r" + messageArray[i] + "\r\n";
                         //break out of the loop to prevent repeat stanzas
                         j += rhymeArray.length + 1;
                     }
@@ -118,7 +118,7 @@ bot.on('message', message => {
             console.log(poem);
             //send message
             message.channel.send(poem);
-            writeToFile('Poems.txt', poem);
+            writeToFile('Poem2.txt', poem);
         });
         
 
@@ -127,7 +127,7 @@ bot.on('message', message => {
   }
 });
 
-
+//maybe replace this with a wiritestream if it causes problems?
 function writeToFile(file, text) {
     fs.writeFileSync(file, text, function(error) {
                 if (error) {
