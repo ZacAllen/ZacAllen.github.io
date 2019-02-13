@@ -1,14 +1,29 @@
-var poems;
-const fs = require('fs')
-var poem = fs.readFile('Poem1.txt', (err, data) => { 
-	if (err) throw err; 
-	var poem = data.toString();
-	var splitPoem = poem.split("/n");
-	for (var i = 0; i < splitPoem.length; i++) {
-        console.log(splitPoem[i]);
-	}
-});
+function readText() {
+    var poems;
+    const fs = require('fs')
+    var poem = fs.readFile('Poem1.txt', (err, data) => { 
+    	if (err) throw err; 
+    	var poem = data.toString();
+    	var splitPoem = poem.split("/n");
+    	for (var i = 0; i < splitPoem.length; i++) {
+            console.log(splitPoem[i]);
+    	}
+    });
+}
 
+// function readText() {
+//                     var poems;
+//                     const fs = require('fs');
+//                     var poem = fs.readFile('Poem1.txt', (err, data) => { 
+//                       if (err) throw err; 
+//                       var poem = data.toString();
+//                       var splitPoem = poem.split("/n");
+//                       for (var i = 0; i < splitPoem.length; i++) {
+//                             console.log(splitPoem[i]);
+//                       }
+//                       document.getElementById("stanza").innerHTML = splitPoem;
+//                     }); 
+//                 }
 
 // window.addEventListener('load', loadPoems, false);
 // console.log(poems[0]);
