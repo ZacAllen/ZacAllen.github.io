@@ -80,8 +80,7 @@ p {
 /* Caption text */
 .text {
   color: #23272A;
-  font-size: 15px;
-  position: absolute;
+  font-size: 12px;
   width: 100%;
   top: 30px;
   text-align: center;
