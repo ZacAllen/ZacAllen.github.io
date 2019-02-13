@@ -9,7 +9,7 @@ var auth = require('./auth.json');
 // initialize the bot
 const bot = new Discord.Client();
 //login token
-bot.login('NTQyMTExNzIxNTQwODEyODEx.D0OjHw.kg9JiKMWZFGW4Zk8FkSrr0kQUWs');
+bot.login('dummy text');
 
 bot.on('ready', () => {
     console.log("I'm ready!");
